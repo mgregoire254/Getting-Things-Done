@@ -42,7 +42,23 @@ def delete(id):
         db.session.commit()
         return redirect('/')
     except:
-        return 'There was a problem deleting that thing'    
+        return 'There was a problem deleting that thing'
+
+@app.route('/update/<int:id>', methods=['GET', 'POST'])
+def update(id):
+    thing = Todo.query.get_or_404(id)
+
+    if request.method == 'POST':
+        thing.content = request.form['content']
+
+        try:
+            db.session.commit()
+            return redirect('/')
+        except:
+            return 'There was a problem updating the thing'
+
+    else:
+        return render_template('update.html', thing=thing)     
 
 
 if __name__ == "__main__":

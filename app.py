@@ -31,7 +31,7 @@ def index():
 #Displays list of things in database by date created.
     else:
         tasks = Todo.query.ordery_by(Todo.date_created).all()
-        return render_template('index.html')
+        return render_template('index.html', tasks=tasks)
     
 if __name__ == "__main__":
     app.run(debug=True)    

@@ -19,20 +19,32 @@ def __repr__(self):
 def index():
     #Adds new thing to list and attempts to append to database.
     if request.method == 'POST':
-        task_content = request.form['content']
-        new_task = Todo(content=task_content)
+        thing_content = request.form['content']
+        new_thing = Todo(content=thing_content)
 
         try:
-            db.session.add(new_task)
+            db.session.add(new_thing)
             db.session.commit()
             return redirect('/')
         except:
             return 'There was an issue adding your thing'
 #Displays list of things in database by date created.
     else:
-        tasks = Todo.query.order_by(Todo.date_created).all()
-        return render_template('index.html', tasks=tasks)
-    
+        things = Todo.query.order_by(Todo.date_created).all()
+        return render_template('index.html', things=things)
+
+@app.route('/delete/<int:id>')
+def delete(id):
+    thing_to_delete = Todo.query.get_or_404(id)
+
+    try:
+        db.session.delete(thing_to_delete)
+        db.session.commit()
+        return redirect('/')
+    except:
+        return 'There was a problem deleting that thing'    
+
+
 if __name__ == "__main__":
     app.run(debug=True)    
 

@@ -1,22 +1,31 @@
 {% extends 'base.html' %}
 
 {% block head %}
+
 <title>Getting Things Done</title>
 {% endblock %}
 
 {% block body %}
-<div class="content">
+<div class="container">
+    <nav class="navbar navbar-dark bg-dark">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">Getting Things Done</a>
+        </div>
+      </nav>
     <h1>Getting Things Done</h1>
     {% if things|length < 1 %}
     <h4>There are no things. Add one below.</h4>
     {% else %}
-    <table>
-        <tr>
-            <th>Thing</th>
-            <th>Added</th>
-            <th>Actions</th>
-        </tr>
+    <table class="table table-bordered table-responsive table-sm table-hover">
+        <thead class="table-dark">
+            <tr>
+                <th scope="col">Thing</th>
+                <th scope="col">Added</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
         {% for thing in things %}
+        <tbody>
             <tr>
                 <td>{{ thing.content }}</td>
                 <td>{{ thing.date_created.date() }}</td>
@@ -27,15 +36,21 @@
 
                 </td>
             </tr>
+        </tbody>
         {% endfor %}    
     </table>
     {% endif %}
-
-    <form action="/" method="POST">
-        <input type="text" name="content" id="content">
-        <input type="submit" value="Add Task">
-
-    </form>
-
+    <div class="form-group">
+        <form action="/" method="POST" class="form-floating">
+            <input type="text" class="form-control" name="content" placeholder="New thing" id="content">
+            <label for="floatingInputValue">New thing</label>
+            
+        </form>
+    </div>
+    <div class="form-group">
+        <button class="btn btn-primary type="submit">Add Task</button>
+    </div>
 </div>
+    
+
 {% endblock %}

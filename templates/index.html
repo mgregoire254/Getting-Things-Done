@@ -7,17 +7,11 @@
 
 {% block body %}
 <div class="container">
-    <nav class="navbar navbar-dark bg-dark">
-        <div class="container-fluid">
-          <a class="navbar-brand" href="#">Getting Things Done</a>
-        </div>
-      </nav>
-    <h1>Getting Things Done</h1>
     {% if things|length < 1 %}
     <h4>There are no things. Add one below.</h4>
     {% else %}
     <table class="table table-bordered table-responsive table-sm table-hover">
-        <thead class="table-dark">
+        <thead class="table-secondary">
             <tr>
                 <th scope="col">Thing</th>
                 <th scope="col">Added</th>
@@ -51,6 +45,19 @@
         <button class="btn btn-primary type="submit">Add Task</button>
     </div>
 </div>
-    
+<footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+    <div class="col-md-4 d-flex align-items-center">
+      <a href="/" class="mb-3 me-2 mb-md-0 text-muted text-decoration-none lh-1">
+        <svg class="bi" width="30" height="24"><use xlink:href="#bootstrap"></use></svg>
+      </a>
+      <span class="mb-3 mb-md-0 text-muted">© Mike Gregoire</span>
+    </div>
+
+    <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
+      <li class="ms-3"><a href="mailto:mgregoire1@me.com">mgregoire1@me.com</a></li>
+      <li class="ms-3"><a href="https://mikegregoire.me">mikegregoire.me</a></li>
+      <li class="ms-3"><a href="https://github.com/mgregoire254/Getting-Things-Done">view code on GitHub</a></p></li>
+    </ul>
+</footer>
 
 {% endblock %}
